@@ -1,18 +1,60 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import InputRange from "../../components/InputRange/InputRange";
+
 import "./Properties.css";
 import useProperties from "../../hooks/useProperties";
 import { PuffLoader } from "react-spinners";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
 const Properties = () => {
-  const { data, isError, isLoading } = useProperties();
+  const { dataProperties, isError, isLoading, images } = useProperties();
   const [filter, setFilter] = useState("");
+  const [valueMin, setValueMin] = useState("");
+  const [valueMax, setValueMax] = useState("");
+  const [ dataFiltered, setDataFiltered ] = useState(dataProperties)
+
+  // data?.map((property) => {
+  //   let resImage = images.filter((img) => img.idProperty === property.idProperty);
+  //   property.images = [resImage];
+  //   return {
+  //     ...property,
+  //     price: property.price.toLocaleString("en-US", {
+  //       style: "currency",
+  //       currency: "USD",
+  //     }),
+  //   };
+  // });
+
+  useEffect(() => { 
+    console.log('actualizado',dataProperties)
+    setDataFiltered(dataProperties);
+  }, [dataProperties])
+
+
   if (isError) {
     return (
       <div className="wrapper">
         <span>Error while fetching data</span>
       </div>
     );
+  }
+
+
+
+  const handleFilter = () => {
+    let newData = dataProperties
+    .filter(
+      (property) =>
+        property?.name.toLowerCase().includes(filter.toLowerCase()) ||
+        property?.address.toLowerCase().includes(filter.toLowerCase())
+    );
+    newData = newData.filter(
+      (property) =>
+        (valueMin === '' || property?.price >= parseFloat(valueMin)) &&
+        (valueMax === '' || property?.price <= parseFloat(valueMax))
+    );
+    console.log('newData--',newData);
+    setDataFiltered(newData)
   }
 
   if (isLoading) {
@@ -28,22 +70,24 @@ const Properties = () => {
       </div>
     );
   }
+  console.log('finilmi ',dataProperties);
   return (
     <div className="wrapper">
       <div className="flexColCenter paddings innerWidth properties-container">
-        <SearchBar filter={filter} setFilter={setFilter} />
+
+        <div className="flexCenter search-bar" style={{width: '100%'}}>
+          <SearchBar filter={filter} setFilter={setFilter} />
+          <InputRange valueMax={valueMax} valueMin={valueMin} setValueMax={setValueMax} setValueMin={setValueMin}/>
+          <button className="button" onClick={()=>handleFilter()}>Buscar</button>
+        </div>
+
 
         <div className="paddings flexCenter properties">
           {
             // data.map((card, i)=> (<PropertyCard card={card} key={i}/>))
 
-            data
-              .filter(
-                (property) =>
-                  property.title.toLowerCase().includes(filter.toLowerCase()) ||
-                  property.city.toLowerCase().includes(filter.toLowerCase()) ||
-                  property.country.toLowerCase().includes(filter.toLowerCase())
-              )
+            dataFiltered
+            //dataProperties
               .map((card, i) => (
                 <PropertyCard card={card} key={i} />
               ))
