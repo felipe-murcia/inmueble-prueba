@@ -17,16 +17,24 @@ const PropertyCard = ({card}) => {
   };
 
   return (
-    <div className="flexColStart r-card"
-    onClick={()=>navigate(`../properties/${card.id}`)}
-    >
-      <img src={image} alt="home" />
-      <span className="secondaryText r-price">
-        <span style={{ color: "orange" }}>$</span>
-        <span>{formatCurrency(card.price)}</span>
-      </span>
-      <span className="primaryText">{truncate(card.name, {length: 15})}</span>
-      <span className="secondaryText">{truncate(card.description, {length: 80})}</span>
+    <div className="property-card" onClick={() => navigate(`../properties/${card.id}`)}>
+      <div className="card-image-container">
+        <img src={image} alt="home" className="card-image" />
+      </div>
+      <div className="card-content">
+        <span className="card-price">
+          <span style={{ color: "orange" }}>$</span>
+          <span>{formatCurrency(card.price)}</span>
+        </span>
+        <span className="card-title">{truncate(card.name, { length: 30 })}</span>
+        <span className="card-location">{card.address}</span> {/* Mostrar la dirección */}
+      </div>
+      <div className="card-footer">
+        <span className="property-details">
+          <span>{card.area} For sale</span>
+          <span>{card.bedrooms} </span>
+        </span>
+      </div>
     </div>
   );
 };
