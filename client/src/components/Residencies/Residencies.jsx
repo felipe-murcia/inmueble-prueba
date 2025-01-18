@@ -10,7 +10,7 @@ import {PuffLoader} from 'react-spinners'
 
 const Residencies = () => {
 
-  const {data, isError, isLoading} = useProperties()
+  const {dataProperties, isError, isLoading} = useProperties()
 
   if(isError){
     return(
@@ -45,7 +45,7 @@ const Residencies = () => {
         <Swiper {...sliderSettings}>
           <SlideNextButton />
           {/* slider */}
-          {data.slice(0, 8).map((card, i) => (
+          {dataProperties.slice(0, 8).map((card, i) => (
             <SwiperSlide key={i}>
               <PropertyCard card={card}/>
             </SwiperSlide>

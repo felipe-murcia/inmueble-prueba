@@ -3,11 +3,6 @@ import { useQuery } from "react-query";
 import { getAllProperties, getAllImages } from "../utils/api";
 
 const useProperties = () => {
-  // const { data = [], isLoading, isError, refetch } = useQuery(
-  //   "allProperties",
-  //   getAllProperties,
-  //   { refetchOnWindowFocus: false }
-  // ); 
 
   let data = [];
   let isError = false;
