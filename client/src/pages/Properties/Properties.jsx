@@ -6,18 +6,30 @@ import "./Properties.css";
 import useProperties from "../../hooks/useProperties";
 import { PuffLoader } from "react-spinners";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
+import { useLocation } from "react-router-dom";
+import { set } from "lodash";
+
 const Properties = () => {
+
+  const location = useLocation();
+
   const { dataProperties, isError, isLoading, images } = useProperties();
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState(" ");
   const [valueMin, setValueMin] = useState("");
   const [valueMax, setValueMax] = useState("");
   const [ dataFiltered, setDataFiltered ] = useState(dataProperties);
 
   useEffect(() => { 
-    console.log('actualizado',dataProperties)
+
+    const queryParams = new URLSearchParams(location.search);
+    const filterWord = queryParams.get("filter");
+    if (filterWord && dataProperties.length > 0) {
+      setFilter(filterWord);
+      setTimeout(() => handleFilter(handleFilter()), 1000);
+       
+    }
     setDataFiltered(dataProperties);
   }, [dataProperties])
-
 
   if (isError) {
     return (
@@ -27,22 +39,19 @@ const Properties = () => {
     );
   }
 
-
-
   const handleFilter = () => {
-    console.log('dataProperties--',valueMin, valueMax);
+    console.log('Filtering by --->',filter);
     let newData = dataProperties
     .filter(
       (property) =>
-        property?.name.toLowerCase().includes(filter.toLowerCase()) ||
-        property?.address.toLowerCase().includes(filter.toLowerCase())
+        property?.name?.toLowerCase().includes(filter.toLowerCase()) ||
+        property?.address?.toLowerCase().includes(filter.toLowerCase())
     );
     newData = newData.filter(
       (property) =>
         (valueMin === '' || property?.price >= parseFloat(valueMin)) &&
         (valueMax === '' || property?.price <= parseFloat(valueMax))
     );
-    console.log('newData--',newData);
     setDataFiltered(newData)
   }
 
@@ -59,7 +68,7 @@ const Properties = () => {
       </div>
     );
   }
-  console.log('finilmi ',dataProperties);
+
   return (
     <div className="wrapper">
       <div className="flexColCenter paddings innerWidth properties-container">
@@ -73,10 +82,8 @@ const Properties = () => {
 
         <div className="paddings flexCenter properties">
           {
-            // data.map((card, i)=> (<PropertyCard card={card} key={i}/>))
 
             dataFiltered
-            //dataProperties
               .map((card, i) => (
                 <PropertyCard card={card} key={i} />
               ))

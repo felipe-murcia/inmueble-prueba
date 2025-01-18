@@ -7,7 +7,6 @@ import OutsideClickHandler from "react-outside-click-handler";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import ProfileMenu from "../ProfileMenu/ProfileMenu";
-import AddPropertyModal from "../basura/AddPropertyModal/AddPropertyModal.jsx";
 import useAuthCheck from "../../hooks/useAuthCheck.jsx";
 
 const Header = () => {
@@ -42,13 +41,12 @@ const Header = () => {
             className="flexCenter h-menu"
             style={getMenuStyles(menuOpened)}
           >
-            <NavLink to="/properties">Properties</NavLink>
+            <NavLink to="/properties">Propiedes</NavLink>
 
-            <a href="mailto:zainkeepscode@gmail.com">Contact</a>
+            <a href="mailto:zainkeepscode@gmail.com">Contactos</a>
 
             {/* add property */}
-            <div onClick={handleAddPropertyClick}>Add Property</div>
-            <AddPropertyModal opened={modalOpened} setOpened={setModalOpened} />
+            <NavLink to="/create">Crear propiedad</NavLink>
             {/* login button */}
             {/* {!isAuthenticated ? (
               <button className="button" onClick={loginWithRedirect}>

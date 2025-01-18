@@ -1,9 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
-import { useMutation, useQuery } from "react-query";
-import { useLocation } from "react-router-dom";
-import { createImageProperty, createProperty, getAllImages, getProperty, removeBooking } from "../../utils/api.js";
+import { createImageProperty, createProperty  } from "../../utils/api.js";
 import { PuffLoader } from "react-spinners";
-import { AiFillHeart } from "react-icons/ai";
 // import "./Property.css";
 import { TextInput, Box, Textarea, Group, Button, NumberInput } from "@mantine/core";
 import { AiOutlineCloudUpload } from "react-icons/ai";
@@ -90,8 +87,6 @@ const Create = () => {
   const handleSubmit = async ()=> {
     const {hasErrors} = form.validate()
 
-    console.log('form--',form.values);
-
     if(form.values.image === null) return toast.error("Debe subir una imagen");
 
     if(!hasErrors) { 
@@ -120,7 +115,6 @@ const Create = () => {
           let responseImage = await createImageProperty(dataImage);
           setIsLoading(false); 
           navigate(`../properties/${response.idProperty}`)
-
       }
     }
     else{
@@ -150,7 +144,7 @@ const Create = () => {
             <TextInput
               withAsterisk
               label="Nombre de la propiedad"
-              placeholder="Property Name"
+              placeholder="Nombre de la propiedad"
               {...form.getInputProps("title")}
               style={{width: '500px'}}
             />

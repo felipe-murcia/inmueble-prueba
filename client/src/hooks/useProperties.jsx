@@ -42,31 +42,6 @@ const useProperties = () => {
 
   }
 
-  console.log('mirelo', dataProperties);
-
-  // let data2 = data.map((property) => {
-  //   let resImage 
-  //   return {
-  //     ...property,
-  //     price: property.price.toLocaleString("en-US", {
-  //       style: "currency",
-  //       currency: "USD",
-  //     }),
-  //   };
-  // });
-
-  // data?.map((property) => {
-  //   let resImage = images.filter((img) => img.idProperty === property.idProperty);
-  //   property.images = [resImage];
-  //   return {
-  //     ...property,
-  //     price: property.price.toLocaleString("en-US", {
-  //       style: "currency",
-  //       currency: "USD",
-  //     }),
-  //   };
-  // });
-
   return {
     data,
     dataProperties,
