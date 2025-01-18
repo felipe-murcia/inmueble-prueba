@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
-import { getProperty, removeBooking } from "../../utils/api";
+import { getAllImages, getProperty, removeBooking } from "../../utils/api";
 import { PuffLoader } from "react-spinners";
 import { AiFillHeart } from "react-icons/ai";
 import "./Property.css";
@@ -22,7 +22,18 @@ const Property = () => {
   const id = pathname.split("/").slice(-1)[0];
   const { data, isLoading, isError } = useQuery(["resd", id], () =>
     getProperty(id)
-  );
+ );
+
+  const [ image, setImage ] = useState('https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=');
+
+  useEffect(() => {
+    getAllImages().then((res) => {
+      let resImage = res.filter((img) => img.idProperty === id);
+      console.log('resImage--',resImage);
+      if(resImage.length > 0) setImage(resImage[0].file);
+    });
+  },[])
+
 
   const [modalOpened, setModalOpened] = useState(false);
   const { validateLogin } = useAuthCheck();
@@ -45,6 +56,10 @@ const Property = () => {
     },
   });
 
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-US').format(amount);
+  };
+
   if (isLoading) {
     return (
       <div className="wrapper">
@@ -65,6 +80,9 @@ const Property = () => {
     );
   }
 
+
+  //let image = card?.images[0]?.file || notFoundImage;
+
   return (
     <div className="wrapper">
       <div className="flexColStart paddings innerWidth property-container">
@@ -74,16 +92,16 @@ const Property = () => {
         </div>
 
         {/* image */}
-        <img src={data?.image} alt="home image" />
+        <img src={image} alt="home image" />
 
         <div className="flexCenter property-details">
           {/* left */}
           <div className="flexColStart left">
             {/* head */}
             <div className="flexStart head">
-              <span className="primaryText">{data?.title}</span>
+              <span className="primaryText">{data?.name}</span>
               <span className="orangeText" style={{ fontSize: "1.5rem" }}>
-                $ {data?.price}
+                $ {formatCurrency(data?.price)}
               </span>
             </div>
 
@@ -91,20 +109,29 @@ const Property = () => {
             <div className="flexStart facilities">
               {/* bathrooms */}
               <div className="flexStart facility">
-                <FaShower size={20} color="#1F3E72" />
-                <span>{data?.facilities?.bathrooms} Bathrooms</span>
+                <span>{data?.codeInternal}</span>
               </div>
+            </div>
+
+
+            {/* facilities */}
+            <div className="flexStart facilities">
+              {/* bathrooms */}
+              <div className="flexStart facility">
+                <FaShower size={20} color="#1F3E72" />
+                <span>2 Bathrooms</span>
+              </div>codeInternal
 
               {/* parkings */}
               <div className="flexStart facility">
                 <AiTwotoneCar size={20} color="#1F3E72" />
-                <span>{data?.facilities.parkings} Parking</span>
+                <span>1 Parking</span>
               </div>
 
               {/* rooms */}
               <div className="flexStart facility">
                 <MdMeetingRoom size={20} color="#1F3E72" />
-                <span>{data?.facilities.bedrooms} Room/s</span>
+                <span>3 Room/s</span>
               </div>
             </div>
 

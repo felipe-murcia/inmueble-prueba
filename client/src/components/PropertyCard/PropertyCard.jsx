@@ -17,7 +17,7 @@ const PropertyCard = ({card}) => {
   };
 
   return (
-    <div className="property-card" onClick={() => navigate(`../properties/${card.id}`)}>
+    <div className="property-card" onClick={() => navigate(`../properties/${card.idProperty}`)}>
       <div className="card-image-container">
         <img src={image} alt="home" className="card-image" />
       </div>

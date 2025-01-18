@@ -11,19 +11,7 @@ const Properties = () => {
   const [filter, setFilter] = useState("");
   const [valueMin, setValueMin] = useState("");
   const [valueMax, setValueMax] = useState("");
-  const [ dataFiltered, setDataFiltered ] = useState(dataProperties)
-
-  // data?.map((property) => {
-  //   let resImage = images.filter((img) => img.idProperty === property.idProperty);
-  //   property.images = [resImage];
-  //   return {
-  //     ...property,
-  //     price: property.price.toLocaleString("en-US", {
-  //       style: "currency",
-  //       currency: "USD",
-  //     }),
-  //   };
-  // });
+  const [ dataFiltered, setDataFiltered ] = useState(dataProperties);
 
   useEffect(() => { 
     console.log('actualizado',dataProperties)
@@ -42,6 +30,7 @@ const Properties = () => {
 
 
   const handleFilter = () => {
+    console.log('dataProperties--',valueMin, valueMax);
     let newData = dataProperties
     .filter(
       (property) =>
