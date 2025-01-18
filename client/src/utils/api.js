@@ -55,10 +55,34 @@ export const getAllImages = async () => {
   }
 };
 
+export const createProperty = async (data) => {
+  try {
+    let response = await api.post(
+      `/Property`, data
+    );
+    return response.data;
+  } catch (error) {
+    toast.error("Something went wrong, Please try again");
+    throw error;
+  }
+};
+
+export const createImageProperty = async (data) => {
+  try {
+    let response = await api.post(
+      `/PropertyImage`, data
+    );
+    return response.data;
+  } catch (error) {
+    toast.error("Something went wrong, Please try again");
+    throw error;
+  }
+};
+
 export const createUser = async (email, token) => {
   try {
     await api.post(
-      `/user/register`,
+      `/Property`,
       { email },
       {
         headers: {

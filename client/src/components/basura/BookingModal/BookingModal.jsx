@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { Modal, Button } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { useMutation } from "react-query";
-import UserDetailContext from "../../context/UserDetailContext.js";
-import { bookVisit } from "../../utils/api.js";
+import UserDetailContext from "../../../context/UserDetailContext.js";
+import { bookVisit } from "../../../utils/api.js";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
 const BookingModal = ({ opened, setOpened, email, propertyId }) => {

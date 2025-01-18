@@ -12,7 +12,7 @@ import { MdLocationPin, MdMeetingRoom } from "react-icons/md";
 import Map from "../../components/Map/Map";
 import useAuthCheck from "../../hooks/useAuthCheck";
 import { useAuth0 } from "@auth0/auth0-react";
-import BookingModal from "../../components/BookingModal/BookingModal";
+import BookingModal from "../../components/basura/BookingModal/BookingModal.jsx";
 import UserDetailContext from "../../context/UserDetailContext.js";
 import { Button } from "@mantine/core";
 import { toast } from "react-toastify";
@@ -120,7 +120,7 @@ const Property = () => {
               <div className="flexStart facility">
                 <FaShower size={20} color="#1F3E72" />
                 <span>2 Bathrooms</span>
-              </div>codeInternal
+              </div>
 
               {/* parkings */}
               <div className="flexStart facility">

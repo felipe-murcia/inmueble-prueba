@@ -1,7 +1,7 @@
 import React from "react";
 import { TextInput, Box, Textarea, Group, Button, NumberInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { validateString } from "../../utils/common";
+import { validateString } from "../../../utils/common";
 
 const BasicDetails = ({ prevStep, nextStep, propertyDetails, setPropertyDetails }) => {
   const form = useForm({
