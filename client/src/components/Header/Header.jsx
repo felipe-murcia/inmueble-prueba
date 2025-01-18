@@ -27,7 +27,7 @@ const Header = () => {
       <div className="flexCenter innerWidth paddings h-container">
         {/* logo */}
         <Link to="/">
-          <img src="./logo.png" alt="logo" width={100} />
+          <img src="./logo-inmobiliaria.png" alt="logo" width={100} />
         </Link>
 
         {/* menu */}
@@ -41,9 +41,9 @@ const Header = () => {
             className="flexCenter h-menu"
             style={getMenuStyles(menuOpened)}
           >
-            <NavLink to="/properties">Propiedes</NavLink>
+            <NavLink to="/properties">Propiedades</NavLink>
 
-            <a href="mailto:zainkeepscode@gmail.com">Contactos</a>
+            <a href="mailto:anderdevia@hotmail.com">Contactos</a>
 
             {/* add property */}
             <NavLink to="/create">Crear propiedad</NavLink>

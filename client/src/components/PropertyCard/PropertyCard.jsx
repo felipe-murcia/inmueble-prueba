@@ -8,7 +8,6 @@ const PropertyCard = ({card}) => {
 
   let notFoundImage = "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=";
   let image = card?.images[0]?.file || notFoundImage;
-  //let image = notFoundImage;
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-US').format(amount);

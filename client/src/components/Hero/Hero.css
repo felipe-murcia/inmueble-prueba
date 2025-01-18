@@ -41,7 +41,7 @@
   border: 3px solid rgba(120, 120, 120, 0.374);
   padding: 0.5rem 1rem;
   width: 100%;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 .search-bar > input {
   border: none;

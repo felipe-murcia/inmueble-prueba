@@ -14,7 +14,7 @@ const Properties = () => {
   const location = useLocation();
 
   const { dataProperties, isError, isLoading, images } = useProperties();
-  const [filter, setFilter] = useState(" ");
+  const [filter, setFilter] = useState("");
   const [valueMin, setValueMin] = useState("");
   const [valueMax, setValueMax] = useState("");
   const [ dataFiltered, setDataFiltered ] = useState(dataProperties);
@@ -25,8 +25,7 @@ const Properties = () => {
     const filterWord = queryParams.get("filter");
     if (filterWord && dataProperties.length > 0) {
       setFilter(filterWord);
-      setTimeout(() => handleFilter(handleFilter()), 1000);
-       
+      setTimeout(() => handleFilter(handleFilter()), 1000);       
     }
     setDataFiltered(dataProperties);
   }, [dataProperties])
